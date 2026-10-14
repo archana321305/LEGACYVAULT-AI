@@ -1,0 +1,2427 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b18">
+<meta name="description" content="LEGACYVAULT AI — Digital Legacy Management and AI Identity Protection.">
+<title>LEGACYVAULT AI | Protect Your Digital Legacy</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #080b18;
+    --panel: #11162a;
+    --panel2: #151b32;
+    --border: rgba(177,164,255,.15);
+    --purple: #a78bfa;
+    --blue: #78aaff;
+    --green: #61e5b0;
+    --red: #ff929e;
+    --text: #f5f5ff;
+    --muted: #9ba3bf;
+    --heading: "Space Grotesk", sans-serif;
+    --body: "DM Sans", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+button, input, textarea, select {
+    font: inherit;
+}
+
+button, a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button:focus-visible, a:focus-visible,
+input:focus-visible, select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--purple);
+    outline-offset: 3px;
+}
+
+::selection {
+    background: #7959c9;
+    color: white;
+}
+
+.container {
+    width: min(1160px, calc(100% - 40px));
+    margin: auto;
+}
+
+.glow {
+    position: absolute;
+    z-index: -1;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: .13;
+    pointer-events: none;
+}
+
+.glow-one {
+    background: #8b5cf6;
+    top: 100px;
+    left: -160px;
+}
+
+.glow-two {
+    background: #3b82f6;
+    top: 900px;
+    right: -180px;
+}
+
+.gradient {
+    color: var(--purple);
+    background: linear-gradient(100deg, #d1c1ff, #a78bfa, #78aaff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #bba8ff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    display: inline-block;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 10px #61e5b055;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 13px 20px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    color: white;
+    background: linear-gradient(110deg, #8961e8, #6846c5);
+    box-shadow: 0 8px 28px #6f49c733;
+    font-size: 12px;
+    font-weight: 700;
+    transition: .2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px #6f49c755;
+}
+
+.btn-outline {
+    border-color: var(--border);
+    background: #ffffff05;
+    box-shadow: none;
+}
+
+.btn-outline:hover {
+    border-color: #a78bfa88;
+    background: #a78bfa0e;
+}
+
+.btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* NAVIGATION */
+
+.navbar {
+    width: min(1280px, calc(100% - 40px));
+    min-height: 78px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border-bottom: 1px solid #ffffff0c;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--heading);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -.5px;
+    white-space: nowrap;
+}
+
+.logo-icon {
+    width: 35px;
+    height: 35px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #b9a3ff66;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #8b5cf6, #5134a5);
+    box-shadow: 0 0 25px #8b5cf622;
+}
+
+.logo-ai {
+    color: var(--purple);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--muted);
+    font-size: 12px;
+    transition: color .2s;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.menu-btn {
+    display: none;
+    color: white;
+    border: none;
+    background: transparent;
+    font-size: 24px;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 590px;
+    padding-top: 75px;
+    padding-bottom: 65px;
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero h1 {
+    margin-top: 23px;
+    font-family: var(--heading);
+    font-size: clamp(43px, 5.2vw, 66px);
+    font-weight: 600;
+    line-height: 1.09;
+    letter-spacing: -3px;
+}
+
+.hero-desc {
+    max-width: 500px;
+    margin-top: 22px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 2;
+}
+
+.hero-actions {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.trust-row {
+    margin-top: 36px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.trust-icon {
+    width: 35px;
+    height: 35px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--purple);
+    background: #a78bfa0c;
+    font-size: 19px;
+}
+
+.trust-text strong,
+.trust-text span {
+    display: block;
+}
+
+.trust-text strong {
+    font-size: 10px;
+}
+
+.trust-text span {
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.trust-divider {
+    width: 1px;
+    height: 32px;
+    margin: 0 8px;
+    background: var(--border);
+}
+
+/* HERO VISUAL */
+
+.hero-visual {
+    position: relative;
+    min-height: 420px;
+    display: grid;
+    place-items: center;
+}
+
+.orbit {
+    position: absolute;
+    border: 1px solid #a78bfa20;
+    border-radius: 50%;
+}
+
+.orbit-one {
+    width: 420px;
+    height: 420px;
+}
+
+.orbit-two {
+    width: 340px;
+    height: 340px;
+    border-style: dashed;
+}
+
+.vault-card {
+    position: relative;
+    z-index: 2;
+    width: min(350px, 100%);
+    padding: 22px;
+    border: 1px solid #b59fff40;
+    border-radius: 22px;
+    background: linear-gradient(145deg, #1c1f3af5, #0e1224f5);
+    box-shadow: 0 30px 100px #0006, 0 0 50px #8b5cf610;
+}
+
+.vault-top, .vault-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.vault-symbol {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #a78bfa55;
+    border-radius: 11px;
+    color: #c5b3ff;
+    background: #a78bfa18;
+    font-size: 23px;
+}
+
+.secure-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #b8bfd8;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.vault-art {
+    position: relative;
+    height: 220px;
+    display: grid;
+    place-items: center;
+}
+
+.vault-ring {
+    position: absolute;
+    border: 1px solid #a78bfa55;
+    border-radius: 50%;
+}
+
+.ring-a {
+    width: 175px;
+    height: 175px;
+}
+
+.ring-b {
+    width: 130px;
+    height: 130px;
+    border-style: dashed;
+    animation: rotate 35s linear infinite;
+}
+
+.vault-core {
+    width: 105px;
+    height: 105px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    border: 1px solid #d0bfff88;
+    border-radius: 28px;
+    background: linear-gradient(145deg, #8d68e9, #4b348e);
+    box-shadow: 0 0 50px #8b5cf644;
+    transform: rotate(-7deg);
+}
+
+.vault-core span {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transform: rotate(7deg);
+}
+
+.vault-lock {
+    font-size: 30px;
+}
+
+.star {
+    position: absolute;
+    color: #c4b5fd;
+    font-size: 24px;
+}
+
+.star-a { top: 32px; right: 48px; }
+.star-b { bottom: 35px; left: 48px; }
+.star-c { top: 68px; left: 38px; color: var(--blue); }
+
+.vault-bottom {
+    padding-top: 15px;
+    border-top: 1px solid var(--border);
+}
+
+.vault-bottom small {
+    color: var(--muted);
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.vault-bottom h3 {
+    margin-top: 4px;
+    font-family: var(--heading);
+    font-size: 12px;
+}
+
+.status {
+    padding: 7px 9px;
+    border: 1px solid #61e5b033;
+    border-radius: 7px;
+    color: var(--green);
+    background: #61e5b00a;
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.progress {
+    height: 3px;
+    margin-top: 17px;
+    overflow: hidden;
+    border-radius: 5px;
+    background: #ffffff12;
+}
+
+.progress span {
+    width: 72%;
+    height: 100%;
+    display: block;
+    background: linear-gradient(90deg, #a78bfa, #70a7ff);
+}
+
+.vault-note {
+    margin-top: 10px;
+    color: #858ca8;
+    font-size: 9px;
+}
+
+.floating-card {
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid #aea4ff30;
+    border-radius: 12px;
+    background: #12162bf5;
+    box-shadow: 0 15px 35px #0004;
+    animation: float 5s ease-in-out infinite;
+}
+
+.float-a { top: 55px; left: -5px; }
+.float-b { right: -5px; bottom: 45px; animation-delay: -2.5s; }
+
+.mini-icon {
+    width: 31px;
+    height: 31px;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+    font-size: 17px;
+}
+
+.mini-purple { color: var(--purple); background: #a78bfa18; }
+.mini-green { color: var(--green); background: #61e5b018; }
+
+.floating-card strong, .floating-card small {
+    display: block;
+}
+
+.floating-card strong { font-size: 10px; }
+.floating-card small { margin-top: 3px; color: var(--muted); font-size: 9px; }
+
+@keyframes rotate {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* STATS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 23px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.stat {
+    padding: 8px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-right: 1px solid var(--border);
+}
+
+.stat:first-child { padding-left: 0; }
+.stat:last-child { border: none; }
+
+.stat-num {
+    color: #c2adff;
+    font-family: var(--heading);
+    font-size: 20px;
+}
+
+.stat p {
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+/* SECTIONS */
+
+.section {
+    padding-top: 105px;
+}
+
+.section-heading {
+    max-width: 650px;
+    margin: 0 auto 42px;
+    text-align: center;
+}
+
+.section-heading .eyebrow {
+    justify-content: center;
+}
+
+.section-heading h2,
+.dashboard-title,
+.cta h2 {
+    margin-top: 15px;
+    font-family: var(--heading);
+    font-size: clamp(32px, 4vw, 45px);
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -1.5px;
+}
+
+.section-heading p {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.9;
+}
+
+/* FEATURES */
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.feature {
+    position: relative;
+    min-height: 245px;
+    overflow: hidden;
+    padding: 25px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: linear-gradient(145deg, #141930, #0d1122);
+    transition: transform .25s, border-color .25s;
+}
+
+.feature:hover {
+    transform: translateY(-4px);
+    border-color: #a78bfa55;
+}
+
+.feature-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.feature-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #ffffff05;
+    font-size: 22px;
+}
+
+.purple { color: var(--purple); }
+.blue { color: var(--blue); }
+.green { color: var(--green); }
+.orange { color: #ffbd85; }
+
+.feature-num {
+    color: #68708d;
+    font-size: 11px;
+}
+
+.feature h3 {
+    margin-top: 21px;
+    font-family: var(--heading);
+    font-size: 17px;
+}
+
+.feature p {
+    position: relative;
+    z-index: 1;
+    max-width: 420px;
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.9;
+}
+
+.feature-link {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    gap: 10px;
+    margin-top: 18px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.decoration {
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    font-size: 130px;
+    opacity: .05;
+    pointer-events: none;
+}
+
+/* DASHBOARD */
+
+.dashboard-head {
+    margin-bottom: 27px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.dashboard-title {
+    font-size: 38px;
+}
+
+.dashboard-subtitle {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.demo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    border: 1px solid #61e5b033;
+    border-radius: 8px;
+    color: var(--green);
+    background: #61e5b008;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 18px;
+}
+
+.panel {
+    min-width: 0;
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    background: linear-gradient(145deg, #12172c, #0d1122);
+}
+
+.panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.panel-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.panel-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.panel h3 {
+    font-family: var(--heading);
+    font-size: 14px;
+}
+
+.panel-tag {
+    color: #7f88a7;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.panel-desc {
+    margin: 15px 0 21px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.9;
+}
+
+label {
+    display: block;
+    margin-bottom: 7px;
+    color: #d8d9ea;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+input, select, textarea {
+    width: 100%;
+    min-height: 43px;
+    margin-bottom: 15px;
+    padding: 11px 12px;
+    border: 1px solid #aaaadc26;
+    border-radius: 8px;
+    outline: none;
+    color: var(--text);
+    background: #0b1021;
+    font-size: 12px;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #68718e;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #a78bfa99;
+    box-shadow: 0 0 0 3px #a78bfa12;
+}
+
+select {
+    cursor: pointer;
+}
+
+select option {
+    color: white;
+    background: #101529;
+}
+
+textarea {
+    resize: vertical;
+    line-height: 1.7;
+}
+
+.full {
+    width: 100%;
+}
+
+.message {
+    min-height: 18px;
+    margin-top: 9px;
+    color: var(--green);
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+.message.error {
+    color: var(--red);
+}
+
+.list-heading {
+    margin-top: 17px;
+    padding-top: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+}
+
+.list-heading h4 {
+    font-size: 12px;
+}
+
+.count {
+    min-width: 25px;
+    height: 25px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #a78bfa33;
+    border-radius: 7px;
+    color: var(--purple);
+    background: #a78bfa0c;
+    font-size: 10px;
+}
+
+.items-list {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid #aaaadc19;
+    border-radius: 9px;
+    background: #ffffff03;
+}
+
+.item h4 {
+    font-size: 11px;
+    overflow-wrap: anywhere;
+}
+
+.item p {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.item-tag {
+    display: inline-block;
+    margin-top: 7px;
+    padding: 4px 7px;
+    border-radius: 5px;
+    color: #c8b8ff;
+    background: #a78bfa15;
+    font-size: 9px;
+}
+
+.remove-btn {
+    flex-shrink: 0;
+    padding: 5px 7px;
+    border: 1px solid #ff7d7d30;
+    border-radius: 6px;
+    color: #ffaaaa;
+    background: #ff7d7d08;
+    font-size: 9px;
+}
+
+.empty {
+    padding: 22px 12px;
+    border: 1px dashed #aaaadc25;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.empty-icon {
+    color: #8f80ce;
+    font-size: 24px;
+}
+
+.empty p {
+    margin-top: 6px;
+    color: #d5d7e9;
+    font-size: 11px;
+}
+
+.empty small {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.privacy-notice {
+    margin-top: 17px;
+    padding: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    border: 1px solid #78aaff25;
+    border-radius: 9px;
+    background: #78aaff08;
+}
+
+.privacy-notice span {
+    color: var(--blue);
+}
+
+.privacy-notice p {
+    color: #aab3d0;
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+.activity-panel {
+    margin-top: 18px;
+}
+
+.text-btn {
+    padding: 7px 9px;
+    border: 1px solid #ff7d7d30;
+    border-radius: 7px;
+    color: #ffaaaa;
+    background: #ff7d7d08;
+    font-size: 10px;
+}
+
+.activity-list {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.activity {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    padding: 12px;
+    border: 1px solid #aaaadc19;
+    border-radius: 9px;
+    background: #ffffff03;
+}
+
+.activity-icon {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+    color: var(--green);
+    background: #61e5b012;
+}
+
+.activity strong {
+    display: block;
+    font-size: 11px;
+}
+
+.activity p {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 10px;
+    overflow-wrap: anywhere;
+}
+
+.activity time {
+    display: block;
+    margin-top: 5px;
+    color: #727b99;
+    font-size: 9px;
+}
+
+/* HOW IT WORKS */
+
+.steps {
+    display: grid;
+    grid-template-columns: 1fr 24px 1fr 24px 1fr;
+    align-items: center;
+    gap: 14px;
+}
+
+.step {
+    position: relative;
+    min-height: 210px;
+    padding: 22px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: linear-gradient(145deg, #12172c, #0d1122);
+}
+
+.step-num {
+    position: absolute;
+    top: 17px;
+    right: 17px;
+    color: #68708d;
+    font-size: 11px;
+}
+
+.step-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #a78bfa33;
+    border-radius: 11px;
+    color: var(--purple);
+    background: #a78bfa10;
+    font-size: 21px;
+}
+
+.step h3 {
+    margin-top: 19px;
+    font-family: var(--heading);
+    font-size: 13px;
+}
+
+.step p {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.9;
+}
+
+.connector {
+    color: #8c7abf;
+    text-align: center;
+    font-size: 20px;
+}
+
+.responsible {
+    margin-top: 22px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    border: 1px solid #61e5b025;
+    border-radius: 10px;
+    background: #61e5b008;
+}
+
+.responsible span {
+    color: var(--green);
+    font-size: 18px;
+}
+
+.responsible p {
+    color: #aeb9cf;
+    font-size: 10px;
+    line-height: 1.9;
+}
+
+.responsible strong {
+    color: #e0f6ed;
+}
+
+/* CTA AND FOOTER */
+
+.cta-section {
+    padding: 100px 0 85px;
+}
+
+.cta {
+    position: relative;
+    overflow: hidden;
+    padding: 62px 22px;
+    border: 1px solid #a78bfa40;
+    border-radius: 20px;
+    background: linear-gradient(115deg, #241d46d9, #11172ff5);
+    text-align: center;
+}
+
+.cta .eyebrow {
+    justify-content: center;
+}
+
+.cta h2 {
+    margin-top: 17px;
+}
+
+.cta p {
+    max-width: 500px;
+    margin: 15px auto 23px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.9;
+}
+
+.footer {
+    min-height: 95px;
+    padding: 23px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    border-top: 1px solid var(--border);
+}
+
+.footer .logo {
+    font-size: 13px;
+}
+
+.footer .logo-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.footer p, .footer small {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+    .hero { gap: 22px; }
+    .hero h1 { font-size: 52px; }
+    .hero-visual { transform: scale(.9); }
+    .float-a { left: -12px; }
+    .float-b { right: -12px; }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px 0;
+    }
+
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(3) { padding-left: 0; }
+}
+
+@media (max-width: 760px) {
+    .container, .navbar {
+        width: calc(100% - 32px);
+    }
+
+    .navbar { min-height: 70px; }
+
+    .logo { font-size: 13px; }
+
+    .logo-icon {
+        width: 31px;
+        height: 31px;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 70px;
+        left: 16px;
+        right: 16px;
+        z-index: 20;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 9px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: #11162a;
+    }
+
+    .nav-links.open { display: flex; }
+
+    .nav-links a {
+        padding: 12px;
+    }
+
+    .nav-links a:hover {
+        background: #a78bfa10;
+    }
+
+    .navbar > .btn {
+        margin-left: auto;
+        padding: 9px 11px;
+        font-size: 10px;
+    }
+
+    .menu-btn { display: block; }
+
+    .hero {
+        padding-top: 52px;
+        padding-bottom: 40px;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .hero h1 {
+        font-size: clamp(42px, 9vw, 58px);
+        letter-spacing: -2px;
+    }
+
+    .hero-desc { font-size: 12px; }
+
+    .hero-visual {
+        min-height: 405px;
+        transform: none;
+    }
+
+    .orbit-one { width: 340px; height: 340px; }
+    .orbit-two { width: 285px; height: 285px; }
+
+    .vault-card {
+        width: min(330px, calc(100% - 35px));
+        padding: 19px;
+    }
+
+    .float-a { top: 33px; left: 0; }
+    .float-b { right: 0; bottom: 20px; }
+
+    .stats { gap: 12px 0; }
+
+    .stat { padding: 7px 11px; }
+
+    .stat:nth-child(odd) { padding-left: 0; }
+
+    .stat-num { font-size: 17px; }
+
+    .stat p { font-size: 9px; }
+
+    .section { padding-top: 80px; }
+
+    .section-heading { margin-bottom: 30px; }
+
+    .feature-grid { grid-template-columns: 1fr; }
+
+    .feature { min-height: 230px; }
+
+    .dashboard-head {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .dashboard-title { font-size: 34px; }
+
+    .dashboard-grid { grid-template-columns: 1fr; }
+
+    .steps {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .step { min-height: auto; }
+
+    .connector { transform: rotate(90deg); }
+
+    .cta-section { padding: 75px 0 60px; }
+
+    .cta { padding: 45px 18px; }
+
+    .cta h2 { font-size: 33px; }
+
+    .footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 420px) {
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .hero-actions .btn { width: 100%; }
+
+    .trust-row { gap: 7px; }
+
+    .trust-divider { margin: 0 2px; }
+
+    .trust-text strong { font-size: 9px; }
+
+    .trust-text span { font-size: 8px; }
+
+    .floating-card { padding: 9px; }
+
+    .floating-card strong { font-size: 9px; }
+
+    .floating-card small { font-size: 8px; }
+
+    .panel { padding: 17px; }
+
+    .panel h3 { font-size: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        scroll-behavior: auto !important;
+        transition: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="glow glow-one"></div>
+<div class="glow glow-two"></div>
+
+<!-- NAVIGATION -->
+
+<header class="navbar">
+    <a href="#home" class="logo">
+        <span class="logo-icon">L</span>
+        <span>LEGACYVAULT<span class="logo-ai"> AI</span></span>
+    </a>
+
+    <nav class="nav-links" id="nav-links">
+        <a href="#features">Features</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#how-it-works">How It Works</a>
+    </nav>
+
+    <a href="#dashboard" class="btn">Explore Platform ↗</a>
+
+    <button class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
+</header>
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero container" id="home">
+
+    <div class="hero-content">
+        <div class="eyebrow"><span class="dot"></span> YOUR DIGITAL FUTURE, PROTECTED</div>
+
+        <h1>
+            Your Digital Life.<br>
+            Your Rules.<br>
+            <span class="gradient">Your Legacy.</span>
+        </h1>
+
+        <p class="hero-desc">
+            Your online identity shouldn't become vulnerable when you're gone.
+            Secure your digital assets, document your wishes, and protect your
+            identity from misuse with a privacy-first digital legacy platform.
+        </p>
+
+        <div class="hero-actions">
+            <a href="#dashboard" class="btn">Secure Your Legacy →</a>
+            <a href="#how-it-works" class="btn btn-outline">Discover How It Works</a>
+        </div>
+
+        <div class="trust-row">
+            <div class="trust-icon">⌁</div>
+            <div class="trust-text">
+                <strong>Privacy First</strong>
+                <span>Your wishes, your control</span>
+            </div>
+
+            <div class="trust-divider"></div>
+
+            <div class="trust-icon">◇</div>
+            <div class="trust-text">
+                <strong>Security Focused</strong>
+                <span>Authorization before access</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-visual">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+
+        <div class="vault-card">
+            <div class="vault-top">
+                <div class="vault-symbol">✳</div>
+                <div class="secure-label"><span class="dot"></span> PRIVACY CENTER</div>
+            </div>
+
+            <div class="vault-art">
+                <div class="vault-ring ring-a"></div>
+                <div class="vault-ring ring-b"></div>
+
+                <div class="vault-core">
+                    <div class="vault-lock">◆</div>
+                    <span>YOUR LEGACY</span>
+                </div>
+
+                <span class="star star-a">✧</span>
+                <span class="star star-b">◇</span>
+                <span class="star star-c">✦</span>
+            </div>
+
+            <div class="vault-bottom">
+                <div>
+                    <small>YOUR DIGITAL FUTURE</small>
+                    <h3>Control starts with you.</h3>
+                </div>
+                <div class="status"><span class="dot"></span> READY</div>
+            </div>
+
+            <div class="progress"><span></span></div>
+            <p class="vault-note">LEGACYVAULT AI · Interface preview</p>
+        </div>
+
+        <div class="floating-card float-a">
+            <div class="mini-icon mini-purple">◇</div>
+            <div>
+                <strong>Legacy Vault</strong>
+                <small>Your wishes, organized</small>
+            </div>
+        </div>
+
+        <div class="floating-card float-b">
+            <div class="mini-icon mini-green">✓</div>
+            <div>
+                <strong>Privacy by Design</strong>
+                <small>Access requires authorization</small>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- STATS -->
+
+<section class="stats container">
+    <div class="stat">
+        <span class="stat-num">01</span>
+        <p>Protect your digital identity</p>
+    </div>
+
+    <div class="stat">
+        <span class="stat-num">02</span>
+        <p>Organize your digital legacy</p>
+    </div>
+
+    <div class="stat">
+        <span class="stat-num">03</span>
+        <p>Control authorized access</p>
+    </div>
+
+    <div class="stat">
+        <span class="stat-num">04</span>
+        <p>Track security incidents</p>
+    </div>
+</section>
+
+<!-- FEATURES -->
+
+<section class="section container" id="features">
+    <div class="section-heading">
+        <div class="eyebrow">ONE PLATFORM. MORE CONTROL.</div>
+
+        <h2>
+            A smarter way to protect<br>
+            <span class="gradient">what matters to you.</span>
+        </h2>
+
+        <p>
+            Manage digital assets, document legacy instructions, and respond
+            to suspected identity misuse through one privacy-focused interface.
+        </p>
+    </div>
+
+    <div class="feature-grid">
+
+        <article class="feature">
+            <div class="feature-top">
+                <div class="feature-icon purple">▤</div>
+                <span class="feature-num">01</span>
+            </div>
+            <h3>Digital Legacy Vault</h3>
+            <p>
+                Organize digital assets and specify what should be preserved,
+                transferred with authorization, or kept private.
+            </p>
+            <a class="feature-link purple" href="#dashboard">Manage legacy assets ↗</a>
+            <div class="decoration">▤</div>
+        </article>
+
+        <article class="feature">
+            <div class="feature-top">
+                <div class="feature-icon blue">⌕</div>
+                <span class="feature-num">02</span>
+            </div>
+            <h3>AI Identity Shield</h3>
+            <p>
+                Report suspected deepfakes, impersonation, and identity misuse
+                for review. Media authenticity is not assumed.
+            </p>
+            <a class="feature-link blue" href="#incident-form">Report an incident ↗</a>
+            <div class="decoration">◇</div>
+        </article>
+
+        <article class="feature">
+            <div class="feature-top">
+                <div class="feature-icon green">⌑</div>
+                <span class="feature-num">03</span>
+            </div>
+            <h3>Zero-Trust Release</h3>
+            <p>
+                Sensitive information stays protected until identity,
+                authorization, and required checks have been reviewed.
+            </p>
+            <a class="feature-link green" href="#how-it-works">Explore verification ↗</a>
+            <div class="decoration">⌑</div>
+        </article>
+
+        <article class="feature">
+            <div class="feature-top">
+                <div class="feature-icon orange">◷</div>
+                <span class="feature-num">04</span>
+            </div>
+            <h3>Transparent Audit Trail</h3>
+            <p>
+                Record demonstration actions, requests, and incident reports
+                so that decisions can be reviewed.
+            </p>
+            <a class="feature-link orange" href="#activity-panel">View activity ↗</a>
+            <div class="decoration">◷</div>
+        </article>
+
+    </div>
+</section>
+
+<!-- DASHBOARD -->
+
+<section class="section container" id="dashboard">
+
+    <div class="dashboard-head">
+        <div>
+            <div class="eyebrow">YOUR CONTROL CENTER</div>
+            <h2 class="dashboard-title">Legacy <span class="gradient">Dashboard</span></h2>
+            <p class="dashboard-subtitle">
+                Try the interactive prototype using fictional demonstration data.
+            </p>
+        </div>
+
+        <div class="demo-badge"><span class="dot"></span> DEMO MODE</div>
+    </div>
+
+    <div class="dashboard-grid">
+
+        <!-- ASSET PLANNER -->
+
+        <section class="panel" aria-labelledby="asset-heading">
+
+            <div class="panel-heading">
+                <div class="panel-title-wrap">
+                    <div class="panel-icon purple">▤</div>
+                    <h3 id="asset-heading">Digital Asset Planner</h3>
+                </div>
+                <span class="panel-tag">ASSETS</span>
+            </div>
+
+            <p class="panel-desc">
+                Record a digital asset and choose your intended legacy instruction.
+            </p>
+
+            <form id="asset-form">
+
+                <label for="asset-name">Asset name</label>
+                <input
+                    id="asset-name"
+                    type="text"
+                    maxlength="100"
+                    placeholder="e.g. Personal photo archive"
+                    required
+                >
+
+                <label for="asset-type">Asset category</label>
+                <select id="asset-type" required>
+                    <option value="">Select a category</option>
+                    <option>Photos & Videos</option>
+                    <option>Personal Documents</option>
+                    <option>Social Media</option>
+                    <option>Creative Work</option>
+                    <option>Digital Accounts</option>
+                    <option>Other</option>
+                </select>
+
+                <label for="asset-instruction">Legacy instruction</label>
+                <select id="asset-instruction" required>
+                    <option value="">Choose an instruction</option>
+                    <option>Preserve</option>
+                    <option>Request Authorized Transfer</option>
+                    <option>Keep Private</option>
+                    <option>Human Review Required</option>
+                </select>
+
+                <button type="submit" class="btn full">+ Add to Legacy Plan</button>
+                <p id="asset-message" class="message" aria-live="polite"></p>
+            </form>
+
+            <div class="list-heading">
+                <h4>Planned assets</h4>
+                <span class="count" id="asset-count">0</span>
+            </div>
+
+            <div class="items-list" id="asset-list"></div>
+        </section>
+
+        <!-- INCIDENT REPORTING -->
+
+        <section class="panel" aria-labelledby="incident-heading">
+
+            <div class="panel-heading">
+                <div class="panel-title-wrap">
+                    <div class="panel-icon blue">⌕</div>
+                    <h3 id="incident-heading">Identity Incident Report</h3>
+                </div>
+                <span class="panel-tag">SECURITY</span>
+            </div>
+
+            <p class="panel-desc">
+                Log a suspected identity misuse incident for investigation.
+                This prototype does not perform deepfake detection.
+            </p>
+
+            <form id="incident-form">
+
+                <label for="incident-type">Incident category</label>
+                <select id="incident-type" required>
+                    <option value="">Select incident type</option>
+                    <option>Suspected AI Impersonation</option>
+                    <option>Unauthorized Account Access</option>
+                    <option>Suspected Document Tampering</option>
+                    <option>Digital Identity Misuse</option>
+                    <option>Suspicious Account Activity</option>
+                </select>
+
+                <label for="incident-description">Incident description</label>
+                <textarea
+                    id="incident-description"
+                    rows="4"
+                    minlength="10"
+                    maxlength="1000"
+                    placeholder="Describe what happened. Do not enter passwords or sensitive personal information."
+                    required
+                ></textarea>
+
+                <label for="incident-risk">Initial concern level</label>
+                <select id="incident-risk" required>
+                    <option value="">Select concern level</option>
+                    <option>Low</option>
+                    <option>Medium</option>
+                    <option>High</option>
+                </select>
+
+                <button type="submit" class="btn full">Submit Incident Report →</button>
+                <p id="incident-message" class="message" aria-live="polite"></p>
+            </form>
+
+            <div class="privacy-notice">
+                <span>ⓘ</span>
+                <p>
+                    Reports in this demo are stored in this browser only.
+                    No forensic analysis or real investigation is performed.
+                </p>
+            </div>
+
+        </section>
+    </div>
+
+    <!-- ACTIVITY -->
+
+    <section class="panel activity-panel" id="activity-panel">
+
+        <div class="panel-heading">
+            <div class="panel-title-wrap">
+                <div class="panel-icon green">◷</div>
+                <h3>Recent Activity</h3>
+            </div>
+
+            <button type="button" class="text-btn" id="clear-data">
+                Clear Demo Data
+            </button>
+        </div>
+
+        <div class="activity-list" id="activity-list"></div>
+
+    </section>
+
+</section>
+
+<!-- HOW IT WORKS -->
+
+<section class="section container" id="how-it-works">
+
+    <div class="section-heading">
+        <div class="eyebrow">BUILT AROUND YOUR CHOICES</div>
+        <h2>How <span class="gradient">it works</span></h2>
+        <p>
+            A responsible workflow for organizing digital assets and responding
+            to identity misuse.
+        </p>
+    </div>
+
+    <div class="steps">
+
+        <article class="step">
+            <span class="step-num">01</span>
+            <div class="step-icon">▤</div>
+            <h3>Document Your Wishes</h3>
+            <p>
+                List digital assets and define how each asset should be handled
+                according to your preferences.
+            </p>
+        </article>
+
+        <div class="connector">→</div>
+
+        <article class="step">
+            <span class="step-num">02</span>
+            <div class="step-icon">◇</div>
+            <h3>Verify Every Request</h3>
+            <p>
+                Require appropriate evidence, permission checks, and review
+                before allowing sensitive actions.
+            </p>
+        </article>
+
+        <div class="connector">→</div>
+
+        <article class="step">
+            <span class="step-num">03</span>
+            <div class="step-icon">✓</div>
+            <h3>Review & Record</h3>
+            <p>
+                Track requests and security incidents, with disputed requests
+                sent for human review.
+            </p>
+        </article>
+
+    </div>
+
+    <div class="responsible">
+        <span>✳</span>
+        <p>
+            <strong>Our security principle:</strong>
+            Inactivity alone does not prove death or authorize the release
+            of personal data. Sensitive requests need appropriate verification,
+            authorization, and a process for resolving disputes.
+        </p>
+    </div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="cta-section container">
+    <div class="cta">
+        <div class="eyebrow">YOUR DIGITAL LIFE DESERVES A PLAN</div>
+
+        <h2>
+            Protect your identity.<br>
+            <span class="gradient">Preserve your legacy.</span>
+        </h2>
+
+        <p>
+            A more thoughtful approach to your digital future begins with
+            privacy, clear instructions, and responsible access control.
+        </p>
+
+        <a href="#dashboard" class="btn">Explore Your Dashboard →</a>
+    </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer class="footer container">
+    <a href="#home" class="logo">
+        <span class="logo-icon">L</span>
+        <span>LEGACYVAULT<span class="logo-ai"> AI</span></span>
+    </a>
+
+    <p>Privacy first. Legacy protected. Identity respected.</p>
+
+    <small>© <span id="year"></span> LEGACYVAULT AI · Hackathon Prototype</small>
+</footer>
+
+<script>
+"use strict";
+
+/*
+ LEGACYVAULT AI
+ Complete single-file frontend demonstration.
+
+ Demo data is stored in this browser using localStorage.
+ This is not a secure backend or a production data vault.
+*/
+
+const KEYS = {
+    assets: "legacyvault_assets_demo",
+    incidents: "legacyvault_incidents_demo",
+    activity: "legacyvault_activity_demo"
+};
+
+const MAX_ASSETS = 100;
+const MAX_INCIDENTS = 100;
+const MAX_ACTIVITY = 50;
+
+let assets = load(KEYS.assets);
+let incidents = load(KEYS.incidents);
+let activity = load(KEYS.activity);
+
+
+// ---------- STORAGE ----------
+
+function load(key) {
+    try {
+        const value = JSON.parse(localStorage.getItem(key) || "[]");
+        return Array.isArray(value) ? value : [];
+    } catch {
+        return [];
+    }
+}
+
+function save(key, value) {
+    try {
+        localStorage.setItem(key, JSON.stringify(value));
+        return true;
+    } catch (error) {
+        console.error("Demo storage unavailable:", error);
+        return false;
+    }
+}
+
+function newId() {
+    if (crypto && typeof crypto.randomUUID === "function") {
+        return crypto.randomUUID();
+    }
+
+    return Date.now() + "-" + Math.random().toString(36).slice(2);
+}
+
+function el(id) {
+    return document.getElementById(id);
+}
+
+function showMessage(id, text, isError = false) {
+    const element = el(id);
+    element.textContent = text;
+    element.classList.toggle("error", isError);
+}
+
+function formattedDate(value) {
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+        return "Unknown time";
+    }
+
+    return date.toLocaleString([], {
+        dateStyle: "medium",
+        timeStyle: "short"
+    });
+}
+
+
+function emptyState(icon, title, description) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "empty";
+
+    const iconElement = document.createElement("div");
+    iconElement.className = "empty-icon";
+    iconElement.textContent = icon;
+
+    const titleElement = document.createElement("p");
+    titleElement.textContent = title;
+
+    const descriptionElement = document.createElement("small");
+    descriptionElement.textContent = description;
+
+    wrapper.append(iconElement, titleElement, descriptionElement);
+
+    return wrapper;
+}
+function addActivity(title, description, icon = "✓") {
+    activity.unshift({
+        id: newId(),
+        title,
+        description,
+        icon,
+        createdAt: new Date().toISOString()
+    });
+
+    activity = activity.slice(0, MAX_ACTIVITY);
+    save(KEYS.activity, activity);
+    renderActivity();
+}
+
+function renderActivity() {
+    const list = el("activity-list");
+    list.replaceChildren();
+
+    if (activity.length === 0) {
+        list.appendChild(
+            emptyState(
+                "◷",
+                "No activity recorded yet.",
+                "Your demo actions will appear here."
+            )
+        );
+
+        return;
+    }
+
+    activity.forEach(entry => {
+        const row = document.createElement("article");
+        row.className = "activity";
+
+        const icon = document.createElement("div");
+        icon.className = "activity-icon";
+        icon.textContent = entry.icon || "✓";
+
+        const content = document.createElement("div");
+
+        const title = document.createElement("strong");
+        title.textContent = entry.title;
+
+        const description = document.createElement("p");
+        description.textContent = entry.description;
+
+        const time = document.createElement("time");
+        time.dateTime = entry.createdAt;
+        time.textContent = formattedDate(entry.createdAt);
+
+        content.append(title, description, time);
+        row.append(icon, content);
+        list.appendChild(row);
+    });
+}
+function renderAssets() {
+    const list = el("asset-list");
+    const count = el("asset-count");
+
+    list.replaceChildren();
+    count.textContent = String(assets.length);
+
+    if (assets.length === 0) {
+        list.appendChild(
+            emptyState(
+                "▤",
+                "No assets added yet.",
+                "Add a fictional asset to try the demo."
+            )
+        );
+
+        return;
+    }
+
+    assets.forEach(asset => {
+        const row = document.createElement("article");
+        row.className = "item";
+
+        const content = document.createElement("div");
+
+        const name = document.createElement("h4");
+        name.textContent = asset.name;
+
+        const category = document.createElement("p");
+        category.textContent = "Category: " + asset.type;
+
+        const instruction = document.createElement("span");
+        instruction.className = "item-tag";
+        instruction.textContent = asset.instruction;
+
+        content.append(name, category, instruction);
+
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "remove-btn";
+        remove.textContent = "Remove";
+        remove.setAttribute("aria-label", "Remove " + asset.name);
+
+        remove.addEventListener("click", () => removeAsset(asset.id));
+
+        row.append(content, remove);
+        list.appendChild(row);
+    });
+}
+
+function removeAsset(id) {
+    const asset = assets.find(item => item.id === id);
+
+    if (!asset) return;
+
+    assets = assets.filter(item => item.id !== id);
+    save(KEYS.assets, assets);
+    renderAssets();
+
+    addActivity(
+        "Legacy asset removed",
+        'Removed "' + asset.name + '" from the demo plan.',
+        "−"
+    );
+
+    showMessage("asset-message", "Asset removed from the demo plan.");
+}
+
+el("asset-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const name = el("asset-name").value.trim();
+    const type = el("asset-type").value;
+    const instruction = el("asset-instruction").value;
+
+    if (!name || !type || !instruction) {
+        showMessage("asset-message", "Please complete all fields.", true);
+        return;
+    }
+
+    if (assets.length >= MAX_ASSETS) {
+        showMessage("asset-message", "Demo asset limit reached.", true);
+        return;
+    }
+
+    const asset = {
+        id: newId(),
+        name,
+        type,
+        instruction,
+        createdAt: new Date().toISOString()
+    };
+
+    assets.unshift(asset);
+
+    const saved = save(KEYS.assets, assets);
+
+    renderAssets();
+
+    addActivity(
+        "Legacy asset added",
+        '"' + name + '" · Instruction: ' + instruction,
+        "▤"
+    );
+
+    this.reset();
+
+    showMessage(
+        "asset-message",
+        saved
+            ? "Asset added to your local demo plan."
+            : "Asset added for this session, but browser storage is unavailable.",
+        !saved
+    );
+});
+el("incident-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const type = el("incident-type").value;
+    const description = el("incident-description").value.trim();
+    const risk = el("incident-risk").value;
+
+    if (!type || !description || !risk) {
+        showMessage("incident-message", "Please complete all fields.", true);
+        return;
+    }
+
+    if (description.length < 10) {
+        showMessage(
+            "incident-message",
+            "Please provide at least 10 characters describing the incident.",
+            true
+        );
+        return;
+    }
+
+    if (incidents.length >= MAX_INCIDENTS) {
+        showMessage(
+            "incident-message",
+            "Incident demo limit reached. Clear the demo data first.",
+            true
+        );
+        return;
+    }
+
+    const incident = {
+        id: newId(),
+        type,
+        description,
+        risk,
+        status: "Pending Review",
+        createdAt: new Date().toISOString()
+    };
+
+    incidents.unshift(incident);
+
+    const saved = save(KEYS.incidents, incidents);
+
+    addActivity(
+        "Identity incident reported",
+        type + " · Concern: " + risk + " · Status: Pending Review",
+        "!"
+    );
+
+    this.reset();
+
+    showMessage(
+        "incident-message",
+        saved
+            ? "Demo report recorded locally as Pending Review. No media analysis was performed."
+            : "Report recorded for this session. Browser storage is unavailable.",
+        !saved
+    );
+});
+el("clear-data").addEventListener("click", function() {
+    const confirmed = confirm(
+        "Delete all LEGACYVAULT AI demo assets, incident reports, and activity from this browser?"
+    );
+
+    if (!confirmed) return;
+
+    assets = [];
+    incidents = [];
+    activity = [];
+
+    const success =
+        save(KEYS.assets, assets) &&
+        save(KEYS.incidents, incidents) &&
+        save(KEYS.activity, activity);
+
+    renderAssets();
+    renderActivity();
+
+    showMessage("asset-message", "");
+    showMessage("incident-message", "");
+
+    if (!success) {
+        alert("The data was cleared in memory, but browser storage may be unavailable.");
+    } else {
+        showMessage("asset-message", "Demo data cleared successfully.");
+    }
+});
+
+
+// ---------- MOBILE NAVIGATION ----------
+
+const menuButton = el("menu-btn");
+const navLinks = el("nav-links");
+
+menuButton.addEventListener("click", function() {
+    const open = navLinks.classList.toggle("open");
+
+    menuButton.setAttribute("aria-expanded", String(open));
+    menuButton.setAttribute(
+        "aria-label",
+        open ? "Close menu" : "Open menu"
+    );
+
+    menuButton.textContent = open ? "✕" : "☰";
+});
+
+navLinks.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.setAttribute("aria-label", "Open menu");
+        menuButton.textContent = "☰";
+    });
+});
+
+function initializeApp() {
+    el("year").textContent = new Date().getFullYear();
+
+    renderAssets();
+    renderActivity();
+}
+
+initializeApp();
+<script>
+const API_URL = "http://127.0.0.1:5000";
+
+async function checkBackend() {
+    try {
+        const response = await fetch(`${API_URL}/api/health`);
+        const data = await response.json();
+
+        console.log("Backend connected:", data);
+    } catch (error) {
+        console.error("Backend connection failed:", error);
+    }
+}
+
+checkBackend();
+</script>
+<!-- LEGACYVAULT AI - Secure File Upload Section -->
+<section id="legacy-upload" style="
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 20px;
+    background: #17152b;
+    color: white;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+">
+    <h2 style="color: #c4b5fd;">📁 Digital Memory Vault</h2>
+
+    <p>Upload photos and documents for your digital legacy plan.</p>
+    <p style="color:#fbbf24;font-size:13px;margin-top:8px;">Local prototype only: do not upload sensitive or confidential documents.</p>
+
+    <form id="uploadForm">
+        <label for="legacyFile">Choose a photo or document</label>
+
+        <input
+            type="file"
+            id="legacyFile"
+            name="file"
+            accept=".png,.jpg,.jpeg,.pdf,.doc,.docx"
+            required
+            style="
+                display: block;
+                width: 100%;
+                margin: 18px 0;
+                padding: 12px;
+                border-radius: 8px;
+                background: white;
+                color: #17152b;
+                box-sizing: border-box;
+            "
+        >
+
+        <button type="submit" style="
+            padding: 12px 22px;
+            border: none;
+            border-radius: 8px;
+            background: #8b5cf6;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        ">
+            Upload File
+        </button>
+    </form>
+
+    <p id="uploadStatus" role="status" aria-live="polite"></p>
+
+    <h3 style="color: #c4b5fd;">Uploaded Files</h3>
+    <button type="button" id="refreshUploads" style="
+        padding: 9px 15px;
+        border: 1px solid #a78bfa;
+        border-radius: 8px;
+        background: transparent;
+        color: white;
+        cursor: pointer;
+    ">
+        Refresh File List
+    </button>
+
+    <ul id="uploadedFiles" style="line-height: 2;"></ul>
+</section>
+
+<script>
+(() => {
+    const API_URL = "http://127.0.0.1:5000";
+
+    const form = document.getElementById("uploadForm");
+    const fileInput = document.getElementById("legacyFile");
+    const status = document.getElementById("uploadStatus");
+    const uploadedFiles = document.getElementById("uploadedFiles");
+    const refreshButton = document.getElementById("refreshUploads");
+
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const file = fileInput.files[0];
+
+        if (!file) {
+            status.textContent = "Please select a file.";
+            return;
+        }
+
+        if (file.size > 10 * 1024 * 1024) {
+            status.textContent = "The file must be 10 MB or smaller.";
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        status.textContent = "Uploading...";
+
+        try {
+            const response = await fetch(`${API_URL}/api/upload`, {
+                method: "POST",
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+                throw new Error(result.message || "Upload failed.");
+            }
+
+            status.textContent = "✅ " + result.message;
+            form.reset();
+            await loadUploadedFiles();
+
+        } catch (error) {
+            status.textContent =
+                "Upload failed: " + error.message +
+                ". Check that the backend is running.";
+        }
+    });
+
+    async function loadUploadedFiles() {
+        uploadedFiles.replaceChildren();
+
+        try {
+            const response = await fetch(`${API_URL}/api/uploads`);
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+                throw new Error("Unable to load files.");
+            }
+
+            if (result.files.length === 0) {
+                const item = document.createElement("li");
+                item.textContent = "No files uploaded yet.";
+                uploadedFiles.appendChild(item);
+                return;
+            }
+
+            result.files.forEach((file) => {
+                const item = document.createElement("li");
+                item.style.marginBottom = "18px";
+                item.style.padding = "12px";
+                item.style.border = "1px solid #a78bfa55";
+                item.style.borderRadius = "10px";
+                item.style.listStyle = "none";
+                item.style.overflowWrap = "anywhere";
+
+                const name = document.createElement("div");
+                name.textContent =
+                    `${file.filename} (${(file.size_bytes / 1024).toFixed(1)} KB)`;
+                name.style.marginBottom = "8px";
+
+                const extension = file.filename.split(".").pop().toLowerCase();
+                if (["png", "jpg", "jpeg"].includes(extension)) {
+                    const preview = document.createElement("img");
+                    preview.src = `${API_URL}/api/previews/${encodeURIComponent(file.filename)}`;
+                    preview.alt = `Preview of ${file.filename}`;
+                    preview.loading = "lazy";
+                    preview.style.display = "block";
+                    preview.style.maxWidth = "100%";
+                    preview.style.maxHeight = "220px";
+                    preview.style.objectFit = "contain";
+                    preview.style.margin = "8px 0 12px";
+                    preview.style.borderRadius = "8px";
+                    preview.onerror = () => {
+                        preview.replaceWith(document.createTextNode("Image preview unavailable."));
+                    };
+                    item.appendChild(preview);
+                } else {
+                    const type = document.createElement("p");
+                    type.textContent = "Preview not available for this document type.";
+                    type.style.color = "#c4b5fd";
+                    type.style.fontSize = "13px";
+                    item.appendChild(type);
+                }
+
+                const download = document.createElement("a");
+                download.textContent = "Download file";
+                download.href =
+                    `${API_URL}/api/uploads/${encodeURIComponent(file.filename)}`;
+                download.style.color = "#c4b5fd";
+                download.style.textDecoration = "underline";
+
+                item.prepend(name);
+                item.appendChild(download);
+                uploadedFiles.appendChild(item);
+            });
+
+        } catch (error) {
+            const item = document.createElement("li");
+            item.textContent = "Could not load uploaded files.";
+            uploadedFiles.appendChild(item);
+        }
+    }
+
+    refreshButton.addEventListener("click", loadUploadedFiles);
+
+    loadUploadedFiles();
+})();
+</script>
+
+</body>
+</html>

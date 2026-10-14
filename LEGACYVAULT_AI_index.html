@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0b1b">
+  <title>LEGACYVAULT AI — Your Digital Life. Your Rules. Your Legacy.</title>
+  <style>
+    :root {
+      --bg: #090a18; --panel: #121329; --panel2: #171832; --line: #2b2c50;
+      --text: #f4f3ff; --muted: #aaa9c7; --purple: #9b7bff; --pink: #e18cff;
+      --green: #75e0b1; --red: #ff8296; --yellow: #ffd27b;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--text); background:
+      radial-gradient(ellipse at 15% 0%, rgba(104,76,205,.2), transparent 36%),
+      radial-gradient(ellipse at 100% 25%, rgba(183,83,205,.12), transparent 30%), var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 36px)); margin: auto; }
+    header { position: sticky; top: 0; z-index: 10; background: rgba(9,10,24,.86); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(255,255,255,.08); }
+    .nav { min-height: 76px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.04em; }
+    .logo { width:42px; height:42px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg,var(--purple),var(--pink)); color:#100d28; font-size:22px; box-shadow:0 8px 28px #9b7bff30; }
+    .brand small { display:block; color:var(--muted); font-size:10px; font-weight:600; letter-spacing:.12em; }
+    nav { display:flex; gap:22px; color:var(--muted); font-size:14px; }
+    nav a:hover { color:white; }
+    .status { display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line); padding:8px 12px; border-radius:999px; font-size:12px; color:var(--muted); white-space:nowrap; }
+    .dot { width:8px; height:8px; border-radius:50%; background:var(--yellow); }
+    .dot.online { background:var(--green); box-shadow:0 0 10px #75e0b177; }
+    .hero { padding:78px 0 42px; display:grid; grid-template-columns:1.3fr .7fr; gap:42px; align-items:center; }
+    .eyebrow { color:#c2b3ff; text-transform:uppercase; letter-spacing:.16em; font-size:12px; font-weight:800; }
+    h1 { font-size:clamp(36px,5.4vw,64px); line-height:1.08; letter-spacing:-.045em; margin:16px 0; }
+    .gradient { background:linear-gradient(100deg,#fff,#c5b4ff 48%,#f1a9ff); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .lead { max-width:650px; color:var(--muted); font-size:17px; }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+    .btn { border:1px solid var(--line); border-radius:12px; padding:11px 16px; font-weight:700; color:var(--text); background:#1a1b37; }
+    .btn.primary { border:0; color:#100d28; background:linear-gradient(120deg,#b5a0ff,#eea5ff); }
+    .btn:hover { transform:translateY(-1px); filter:brightness(1.07); }
+    .hero-card, .card, .stat { border:1px solid var(--line); background:linear-gradient(145deg,rgba(23,24,50,.95),rgba(14,15,34,.95)); border-radius:20px; }
+    .hero-card { padding:25px; box-shadow:0 24px 70px #0003; }
+    .vault-icon { width:62px;height:62px;border-radius:19px;display:grid;place-items:center;background:#a18aff1c;border:1px solid #9b7bff55;font-size:29px;margin-bottom:18px; }
+    .hero-card h3 { margin:0 0 8px; font-size:20px; }
+    .hero-card p { color:var(--muted); font-size:14px; margin:0 0 20px; }
+    .mini-row { display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--line); padding:13px 0; font-size:13px; }
+    .tag { border-radius:999px; padding:4px 9px; font-size:11px; font-weight:700; color:var(--green); background:#75e0b115; }
+    section { padding:34px 0; }
+    .section-head { display:flex; justify-content:space-between; gap:18px; align-items:end; margin-bottom:20px; }
+    h2 { font-size:clamp(25px,3vw,34px); margin:5px 0; letter-spacing:-.025em; }
+    .sub { color:var(--muted); margin:0; max-width:700px; font-size:14px; }
+    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .stat { padding:20px; }
+    .stat .number { font-size:30px; font-weight:800; letter-spacing:-.04em; }
+    .stat .label { color:var(--muted); font-size:13px; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .card { padding:23px; min-width:0; }
+    .card h3 { margin:0 0 6px; font-size:19px; }
+    .card-intro { margin:0 0 20px; color:var(--muted); font-size:13px; }
+    label { display:block; margin:13px 0 6px; color:#dcdaf6; font-size:13px; font-weight:700; }
+    input, select, textarea { width:100%; color:var(--text); background:#0c0d20; border:1px solid #333456; border-radius:10px; padding:11px 12px; outline:none; }
+    input:focus, select:focus, textarea:focus { border-color:var(--purple); box-shadow:0 0 0 3px #9b7bff20; }
+    textarea { min-height:105px; resize:vertical; }
+    select option { background:#121329; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .form-actions { margin-top:17px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+    .message { min-height:22px; font-size:12px; color:var(--green); }
+    .message.error { color:var(--red); }
+    .list { display:grid; gap:10px; margin-top:16px; }
+    .item { border:1px solid var(--line); border-radius:13px; padding:14px; background:#0c0d20aa; }
+    .item-top { display:flex; justify-content:space-between; gap:12px; align-items:start; }
+    .item-title { font-weight:750; overflow-wrap:anywhere; }
+    .item-meta { color:var(--muted); font-size:12px; margin-top:4px; overflow-wrap:anywhere; }
+    .item-note { font-size:13px; margin-top:8px; color:#dedcf4; overflow-wrap:anywhere; white-space:pre-wrap; }
+    .delete { color:var(--red); background:#ff829610; border:1px solid #ff829640; border-radius:8px; padding:5px 8px; font-size:12px; }
+    .empty { color:var(--muted); font-size:13px; border:1px dashed #3a3b5d; border-radius:12px; padding:18px; text-align:center; }
+    .activity { display:grid; gap:10px; }
+    .activity-row { display:flex; gap:12px; align-items:start; padding:13px 0; border-bottom:1px solid var(--line); }
+    .activity-icon { width:34px;height:34px; flex:0 0 34px; border-radius:11px; display:grid;place-items:center;background:#9b7bff18; }
+    .activity-text { font-size:13px; }
+    .activity-time { font-size:11px; color:var(--muted); }
+    .privacy { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .privacy .card { padding:18px; }
+    .privacy .symbol { font-size:23px; }
+    .privacy h3 { font-size:15px; margin:7px 0; }
+    .privacy p { color:var(--muted); font-size:13px; margin:0; }
+    .notice { border:1px solid #ffd27b45; background:#ffd27b0b; color:#e9d8b4; border-radius:12px; padding:13px 15px; font-size:12px; margin-top:18px; }
+    footer { border-top:1px solid var(--line); margin-top:45px; padding:25px 0 35px; color:var(--muted); font-size:12px; }
+    .footer-row { display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; }
+    @media(max-width:800px) { .hero { grid-template-columns:1fr; padding-top:52px; } .grid { grid-template-columns:1fr; } nav { gap:12px; flex-wrap:wrap; justify-content:center; } .nav { flex-wrap:wrap; padding:13px 0; } .stats,.privacy { grid-template-columns:1fr; } .section-head { align-items:start; flex-direction:column; } }
+    @media(max-width:480px) { .wrap { width:calc(100% - 24px); } .form-row { grid-template-columns:1fr; gap:0; } .card { padding:17px; } .hero { gap:25px; } nav { font-size:12px; } }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#home" aria-label="LEGACYVAULT AI home">
+      <span class="logo">◇</span><span>LEGACYVAULT <span class="gradient">AI</span><small>YOUR DIGITAL LIFE. YOUR RULES.</small></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#dashboard">Dashboard</a><a href="#assets">Digital Assets</a><a href="#incidents">Report Incident</a><a href="#privacy">Privacy</a>
+    </nav>
+    <div class="status"><span class="dot" id="backend-dot"></span><span id="backend-status">Checking backend…</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" id="home">
+    <div>
+      <div class="eyebrow">Cybersecurity · Digital privacy · Digital legacy</div>
+      <h1>Your digital life.<br><span class="gradient">Your rules. Your legacy.</span></h1>
+      <p class="lead">A privacy-first place to record what should happen to your digital assets, preserve your instructions, and document suspicious identity activity—with human review kept in the loop.</p>
+      <div class="actions"><a class="btn primary" href="#assets">Create an asset plan ↗</a><a class="btn" href="#incidents">Report a concern</a></div>
+    </div>
+    <aside class="hero-card">
+      <div class="vault-icon">⌑</div>
+      <h3>Your legacy, thoughtfully protected.</h3>
+      <p>Record clear instructions for digital accounts and files, and keep a record of reported identity concerns.</p>
+      <div class="mini-row"><span>Asset instructions</span><span class="tag">User-controlled</span></div>
+      <div class="mini-row"><span>Incident reports</span><span class="tag">Human review</span></div>
+      <div class="mini-row"><span>Prototype storage</span><span class="tag">Local database</span></div>
+    </aside>
+  </section>
+
+  <section id="dashboard">
+    <div class="section-head"><div><div class="eyebrow">Overview</div><h2>Your vault dashboard</h2><p class="sub">This dashboard reflects records saved to the connected local Flask database.</p></div></div>
+    <div class="stats">
+      <div class="stat"><div class="number" id="asset-count">0</div><div class="label">Digital assets planned</div></div>
+      <div class="stat"><div class="number" id="incident-count">0</div><div class="label">Incident reports recorded</div></div>
+      <div class="stat"><div class="number" id="review-count">0</div><div class="label">Reports for human review</div></div>
+    </div>
+  </section>
+
+  <section id="assets">
+    <div class="section-head"><div><div class="eyebrow">01 · Plan your legacy</div><h2>Digital Asset Planner</h2><p class="sub">Add an account, file, device, or other digital asset and write down what you want done with it.</p></div></div>
+    <div class="grid">
+      <form class="card" id="asset-form">
+        <h3>＋ Add a digital asset</h3><p class="card-intro">Only enter information you are comfortable storing in this demo. Never enter passwords or recovery codes.</p>
+        <label for="asset-name">Asset name</label><input id="asset-name" name="asset-name" maxlength="120" placeholder="e.g. Personal photo archive" required>
+        <div class="form-row">
+          <div><label for="asset-type">Asset category</label><select id="asset-type" required><option value="">Choose category</option><option>Social Media</option><option>Email</option><option>Photos & Videos</option><option>Documents</option><option>Financial</option><option>Website / Domain</option><option>Device</option><option>Cloud Storage</option><option>Other</option></select></div>
+          <div><label for="asset-instruction">Preferred instruction</label><select id="asset-instruction" required><option value="">Choose instruction</option><option>Preserve</option><option>Transfer to trusted person</option><option>Delete after verification</option><option>Keep private</option><option>Human review required</option></select></div>
+        </div>
+        <div class="form-actions"><button class="btn primary" type="submit">Save asset plan</button><span class="message" id="asset-message" role="status"></span></div>
+        <div class="notice">Prototype note: these records are stored in a local SQLite database on the computer running the backend. This is not a secure estate-management service.</div>
+      </form>
+      <div class="card"><h3>Your planned assets</h3><p class="card-intro">Your saved asset instructions appear here.</p><div class="list" id="asset-list"><div class="empty">Loading your assets…</div></div></div>
+    </div>
+  </section>
+
+  <section id="incidents">
+    <div class="section-head"><div><div class="eyebrow">02 · Protect your identity</div><h2>Identity Incident Report</h2><p class="sub">Record suspected impersonation, account misuse, deepfake concerns, or other digital identity issues.</p></div></div>
+    <div class="grid">
+      <form class="card" id="incident-form">
+        <h3>＋ Record a concern</h3><p class="card-intro">Describe what you noticed. Do not include passwords, government ID numbers, or other unnecessary sensitive information.</p>
+        <label for="incident-type">Incident type</label><select id="incident-type" required><option value="">Choose incident type</option><option>Suspected impersonation</option><option>Deepfake or manipulated media concern</option><option>Unauthorized account access</option><option>Suspicious message or scam</option><option>Personal data exposure</option><option>Other digital identity concern</option></select>
+        <label for="incident-description">What happened?</label><textarea id="incident-description" maxlength="2000" placeholder="Describe what you observed, where it happened, and when. Avoid posting private credentials." required></textarea>
+        <label for="incident-risk">Concern level</label><select id="incident-risk" required><option value="">Choose concern level</option><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select>
+        <div class="form-actions"><button class="btn primary" type="submit">Save incident report</button><span class="message" id="incident-message" role="status"></span></div>
+      </form>
+      <div class="card"><h3>Incident reports</h3><p class="card-intro">Reports are recorded for follow-up. This prototype does not automatically detect or verify deepfakes.</p><div class="list" id="incident-list"><div class="empty">Loading incident reports…</div></div></div>
+    </div>
+  </section>
+
+  <section id="activity">
+    <div class="section-head"><div><div class="eyebrow">03 · Keep track</div><h2>Recent activity</h2><p class="sub">A recent view of saved records returned by the backend.</p></div><button class="btn" id="refresh-button" type="button">↻ Refresh records</button></div>
+    <div class="card"><div class="activity" id="activity-list"><div class="empty">Loading activity…</div></div></div>
+  </section>
+
+  <section id="privacy">
+    <div class="section-head"><div><div class="eyebrow">Privacy by design</div><h2>Built around informed choices</h2></div></div>
+    <div class="privacy">
+      <article class="card"><div class="symbol">◈</div><h3>Clear instructions</h3><p>Record what should happen to an asset rather than leaving your wishes unclear.</p></article>
+      <article class="card"><div class="symbol">◎</div><h3>Human review</h3><p>High-impact decisions should be checked by a trusted, authorized person.</p></article>
+      <article class="card"><div class="symbol">⌁</div><h3>Data minimization</h3><p>Store only the details needed for this prototype. Do not store credentials or secrets.</p></article>
+    </div>
+    <div class="notice">Security disclaimer: LEGACYVAULT AI is a hackathon prototype, not legal advice, an identity-verification authority, or a production-grade secure vault. The local API has no authentication. Do not expose it to the public internet or use real sensitive personal data.</div>
+  </section>
+</main>
+
+<footer><div class="wrap footer-row"><span>© <span id="year"></span> LEGACYVAULT AI · Your Digital Life. Your Rules. Your Legacy.</span><span>Built for digital privacy awareness · Prototype</span></div></footer>
+
+<script>
+"use strict";
+
+const API_URL = "http://127.0.0.1:5000";
+const byId = (id) => document.getElementById(id);
+
+let assets = [];
+let incidents = [];
+
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[char]);
+}
+
+function prettyDate(value) {
+  if (!value) return "Date unavailable";
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? String(value) : date.toLocaleString();
+}
+
+function showMessage(id, text, isError = false) {
+  const node = byId(id);
+  node.textContent = text;
+  node.classList.toggle("error", isError);
+}
+
+async function apiRequest(path, options = {}) {
+  const response = await fetch(`${API_URL}${path}`, {
+    ...options,
+    headers: { "Content-Type": "application/json", ...(options.headers || {}) }
+  });
+  let data;
+  try { data = await response.json(); }
+  catch { throw new Error(`Server returned an unreadable response (${response.status}).`); }
+  if (!response.ok || data.success === false) {
+    throw new Error(data.message || `Request failed (${response.status}).`);
+  }
+  return data;
+}
+
+function setBackendStatus(online, text) {
+  byId("backend-status").textContent = text;
+  byId("backend-dot").classList.toggle("online", online);
+}
+
+async function checkBackend() {
+  try {
+    const data = await apiRequest("/api/health");
+    setBackendStatus(true, "Backend connected");
+    return data;
+  } catch (error) {
+    setBackendStatus(false, "Backend offline");
+    console.error("Backend connection failed:", error);
+    return null;
+  }
+}
+
+function renderAssets() {
+  byId("asset-count").textContent = assets.length;
+  const list = byId("asset-list");
+  if (!assets.length) {
+    list.innerHTML = '<div class="empty">No assets yet. Add your first digital asset plan.</div>';
+    return;
+  }
+  list.innerHTML = assets.map((asset) => `
+    <article class="item">
+      <div class="item-top">
+        <div><div class="item-title">${escapeHtml(asset.asset_name)}</div>
+        <div class="item-meta">${escapeHtml(asset.category)} · ${escapeHtml(prettyDate(asset.created_at))}</div></div>
+        <button class="delete" type="button" data-delete-asset="${Number(asset.id)}" aria-label="Delete ${escapeHtml(asset.asset_name)}">Delete</button>
+      </div>
+      <div class="item-note">Instruction: ${escapeHtml(asset.instruction)}</div>
+    </article>`).join("");
+}
+
+function renderIncidents() {
+  byId("incident-count").textContent = incidents.length;
+  byId("review-count").textContent = incidents.length;
+  const list = byId("incident-list");
+  if (!incidents.length) {
+    list.innerHTML = '<div class="empty">No incident reports have been recorded.</div>';
+    return;
+  }
+  list.innerHTML = incidents.map((incident) => `
+    <article class="item">
+      <div class="item-top"><div class="item-title">${escapeHtml(incident.incident_type)}</div>
+      <span class="tag" style="color:${incident.concern_level === "Critical" || incident.concern_level === "High" ? "var(--red)" : "var(--green)"}">${escapeHtml(incident.concern_level)}</span></div>
+      <div class="item-meta">${escapeHtml(prettyDate(incident.created_at))} · Pending human review</div>
+      <div class="item-note">${escapeHtml(incident.description)}</div>
+    </article>`).join("");
+}
+
+function renderActivity() {
+  const entries = [
+    ...assets.map(a => ({ title: `Asset plan saved: ${a.asset_name}`, type: "Digital asset", date: a.created_at })),
+    ...incidents.map(i => ({ title: `Incident reported: ${i.incident_type}`, type: `${i.concern_level} concern`, date: i.created_at }))
+  ].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 10);
+
+  const list = byId("activity-list");
+  if (!entries.length) {
+    list.innerHTML = '<div class="empty">No activity yet. Saved asset plans and incident reports will appear here.</div>';
+    return;
+  }
+  list.innerHTML = entries.map(entry => `
+    <div class="activity-row"><div class="activity-icon">${entry.type === "Digital asset" ? "◇" : "!"}</div>
+    <div><div class="activity-text">${escapeHtml(entry.title)}</div>
+    <div class="activity-time">${escapeHtml(entry.type)} · ${escapeHtml(prettyDate(entry.date))}</div></div></div>`).join("");
+}
+
+async function loadAllRecords() {
+  byId("refresh-button").disabled = true;
+  byId("refresh-button").textContent = "Loading…";
+  try {
+    const [assetData, incidentData] = await Promise.all([
+      apiRequest("/api/assets"),
+      apiRequest("/api/incidents")
+    ]);
+    assets = Array.isArray(assetData.assets) ? assetData.assets : [];
+    incidents = Array.isArray(incidentData.incidents) ? incidentData.incidents : [];
+    renderAssets();
+    renderIncidents();
+    renderActivity();
+    setBackendStatus(true, "Backend connected");
+  } catch (error) {
+    console.error("Could not load records:", error);
+    byId("asset-list").innerHTML = `<div class="empty">Could not load assets. ${escapeHtml(error.message)} Start the Flask server and refresh.</div>`;
+    byId("incident-list").innerHTML = `<div class="empty">Could not load reports. ${escapeHtml(error.message)}</div>`;
+    byId("activity-list").innerHTML = '<div class="empty">Activity is unavailable while the backend is disconnected.</div>';
+    setBackendStatus(false, "Backend connection error");
+  } finally {
+    byId("refresh-button").disabled = false;
+    byId("refresh-button").textContent = "↻ Refresh records";
+  }
+}
+
+byId("asset-form").addEventListener("submit", async function (event) {
+  event.preventDefault();
+  const name = byId("asset-name").value.trim();
+  const category = byId("asset-type").value;
+  const instruction = byId("asset-instruction").value;
+  if (!name || !category || !instruction) {
+    showMessage("asset-message", "Please complete every field.", true);
+    return;
+  }
+  const button = this.querySelector('button[type="submit"]');
+  button.disabled = true;
+  showMessage("asset-message", "Saving…");
+  try {
+    await apiRequest("/api/assets", {
+      method: "POST",
+      body: JSON.stringify({ asset_name: name, category, instruction })
+    });
+    this.reset();
+    showMessage("asset-message", "Asset plan saved successfully.");
+    await loadAllRecords();
+  } catch (error) {
+    showMessage("asset-message", `Could not save: ${error.message}`, true);
+  } finally {
+    button.disabled = false;
+  }
+});
+
+byId("asset-list").addEventListener("click", async (event) => {
+  const button = event.target.closest("[data-delete-asset]");
+  if (!button) return;
+  const id = button.getAttribute("data-delete-asset");
+  const asset = assets.find(item => String(item.id) === String(id));
+  if (!asset || !window.confirm(`Delete the asset plan "${asset.asset_name}"?`)) return;
+  button.disabled = true;
+  try {
+    await apiRequest(`/api/assets/${encodeURIComponent(id)}`, { method: "DELETE" });
+    showMessage("asset-message", "Asset plan deleted.");
+    await loadAllRecords();
+  } catch (error) {
+    showMessage("asset-message", `Could not delete: ${error.message}`, true);
+    button.disabled = false;
+  }
+});
+
+byId("incident-form").addEventListener("submit", async function (event) {
+  event.preventDefault();
+  const incident_type = byId("incident-type").value;
+  const description = byId("incident-description").value.trim();
+  const concern_level = byId("incident-risk").value;
+  if (!incident_type || !description || !concern_level) {
+    showMessage("incident-message", "Please complete every field.", true);
+    return;
+  }
+  const button = this.querySelector('button[type="submit"]');
+  button.disabled = true;
+  showMessage("incident-message", "Saving…");
+  try {
+    await apiRequest("/api/incidents", {
+      method: "POST",
+      body: JSON.stringify({ incident_type, description, concern_level })
+    });
+    this.reset();
+    showMessage("incident-message", "Incident report saved for human review.");
+    await loadAllRecords();
+  } catch (error) {
+    showMessage("incident-message", `Could not save: ${error.message}`, true);
+  } finally {
+    button.disabled = false;
+  }
+});
+
+byId("refresh-button").addEventListener("click", async () => {
+  await checkBackend();
+  await loadAllRecords();
+});
+
+byId("year").textContent = new Date().getFullYear();
+(async function initializeApp() {
+  const online = await checkBackend();
+  if (online) await loadAllRecords();
+  else {
+    byId("asset-list").innerHTML = '<div class="empty">Backend is offline. Start the Flask server, then click Refresh records.</div>';
+    byId("incident-list").innerHTML = '<div class="empty">Backend is offline. Start the Flask server, then click Refresh records.</div>';
+    byId("activity-list").innerHTML = '<div class="empty">Connect the backend to load activity.</div>';
+  }
+})();
+</script>
+</body>
+</html>
